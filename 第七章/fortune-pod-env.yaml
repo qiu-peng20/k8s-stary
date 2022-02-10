@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fortune
+spec:
+  containers:
+    - image: 973942322/fortune:env
+      name: fortune-env
+      env:
+        - name: INTERVAL
+          value: "200"

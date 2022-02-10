@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubia
+  template:
+    metadata:
+      name: mongodb
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodb-data
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
